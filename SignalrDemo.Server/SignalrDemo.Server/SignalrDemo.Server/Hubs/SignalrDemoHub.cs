@@ -3,7 +3,7 @@ using SignalrDemo.Server.Interfaces;
 
 namespace SignalrDemo.Server.Hubs
 {
-    public class SignalrDemoHub : Hub
+    public class SignalrDemoHub : Hub<ISignalrDemoHub>
     {
         public void Hello()
         {
@@ -11,3 +11,4 @@ namespace SignalrDemo.Server.Hubs
         }
     }
 }
+
