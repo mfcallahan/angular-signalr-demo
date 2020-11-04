@@ -1,7 +1,9 @@
-﻿namespace SignalrDemo.Server.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace SignalrDemo.Server.Interfaces
 {
     public interface ISignalrDemoHub
     {
-        void DisplayMessage(string messgage);
+        Task DisplayMessage(string messgage);
     }
 }
