@@ -8,7 +8,6 @@ import { SignalrService } from './signalr.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  hubHelloMessage: Subject<string>;
 
   constructor(public signalrService: SignalrService) { }
 
