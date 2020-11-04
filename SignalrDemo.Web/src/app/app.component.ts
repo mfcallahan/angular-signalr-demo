@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
 import { SignalrService } from './signalr.service';
 
 @Component({
@@ -8,7 +7,6 @@ import { SignalrService } from './signalr.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
   constructor(public signalrService: SignalrService) { }
 
   ngOnInit(): void {

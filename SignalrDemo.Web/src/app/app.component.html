@@ -1,2 +1,10 @@
 <h2>SignalR Demo</h2>
 <p><b>hubHelloMessage:</b> {{ signalrService.hubHelloMessage }}</p>
+<p>
+  <mat-progress-bar
+    [color]="blue"
+    [mode]="determinate"
+    [value]="signalrService.progressPercentage"
+  >
+  </mat-progress-bar>
+</p>
