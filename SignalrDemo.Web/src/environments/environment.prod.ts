@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  signalrHubUrl: 'http://mfcallahan-signalr-demo.azurewebsites.net/signalrdemohub'
+  signalrHubUrl: 'https://mfcallahan-signalr-demo.azurewebsites.net/signalrdemohub'
 };
