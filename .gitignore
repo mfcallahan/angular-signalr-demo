@@ -8,6 +8,10 @@
 *.sln.docstates
 .vscode/
 
+# Visual Studio publish files
+PublishProfiles/
+ServiceDependencies/
+
 # .NET application data
 App_Data/
 
@@ -69,7 +73,6 @@ ClientBin/
 *.publishsettings
 node_modules/
 orleans.codegen.cs
-**/Scripts/*jquery*
 
 # Backup & report files from converting an old project file to a newer Visual Studio version. 
 _UpgradeReport_Files/
