@@ -7,6 +7,8 @@ import { SignalrService } from './signalr.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  processing: boolean;
+
   constructor(public signalrService: SignalrService) { }
 
   ngOnInit(): void {
@@ -15,6 +17,24 @@ export class AppComponent implements OnInit {
       .catch(error => {
         console.log(`SignalrDemoHub.Hello() error: ${error}`);
         alert('SignalrDemoHub.Hello() error!, see console for details.');
-      });
+      }
+    );
+  }
+
+  public processData(): void {
+    this.processing = true;
+    this.signalrService.progressPercentage = 0;
+    this.signalrService.progressMessage = null;
+
+    this.signalrService.connection
+      .invoke('SimulateDataProcessing')
+      .then(() => {
+        this.processing = false;
+      })
+      .catch(error => {
+        console.log(`SignalrDemoHub.SimulateDataProcessing() error: ${error}`);
+        alert('SignalrDemoHub.SimulateDataProcessing() error!, see console for details.');
+      }
+    );
   }
 }

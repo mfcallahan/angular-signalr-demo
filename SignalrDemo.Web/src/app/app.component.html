@@ -2,9 +2,13 @@
 <p><b>hubHelloMessage:</b> {{ signalrService.hubHelloMessage }}</p>
 <p>
   <mat-progress-bar
-    [color]="blue"
-    [mode]="determinate"
+    style="width: 400px; height: 20px; display: inline-block"
+    mode="determinate"
     [value]="signalrService.progressPercentage"
   >
   </mat-progress-bar>
+  <span>{{ signalrService.progressMessage }}</span>
+</p>
+<p>
+  <button [disabled]="processing" (click)="processData()">Process Data</button>
 </p>

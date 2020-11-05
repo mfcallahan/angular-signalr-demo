@@ -6,5 +6,6 @@ namespace SignalrDemo.Server.Interfaces
     {
         Task DisplayMessage(string messgage);
         Task UpdateProgressBar(int percentage);
+        Task DisplayProgressMessage(string messgage);
     }
 }

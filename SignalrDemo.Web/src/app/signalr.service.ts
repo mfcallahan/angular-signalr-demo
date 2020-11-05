@@ -8,6 +8,8 @@ export class SignalrService {
   connection: signalR.HubConnection;
   hubProxy: any;
   hubHelloMessage: string;
+  progressPercentage: number;
+  progressMessage: string;
 
   constructor() { }
 
@@ -36,6 +38,14 @@ export class SignalrService {
   private setSignalrClientMethods(): void {
     this.connection.on('DisplayMessage', (message: string) => {
       this.hubHelloMessage = message;
+    });
+
+    this.connection.on('UpdateProgressBar', (percentage: number) => {
+      this.progressPercentage = percentage;
+    });
+
+    this.connection.on('DisplayProgressMessage', (message: string) => {
+      this.progressMessage = message;
     });
   }
 }
