@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import * as signalR from '@microsoft/signalr';
 
 @Injectable({
@@ -17,7 +18,7 @@ export class SignalrService {
   public initiateSignalrConnection(): Promise<any>{
     return new Promise((resolve, reject) => {
       this.connection = new signalR.HubConnectionBuilder()
-        .withUrl('https://localhost:44333/signalrdemohub') // the SignalR server url as set in the .NET Project properties and Startup class
+        .withUrl(environment.signalrHubUrl) // the SignalR server url as set in the .NET Project properties and Startup class
         .build();
 
       this.setSignalrClientMethods();
