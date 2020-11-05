@@ -1,3 +1,4 @@
+import { NgZone } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { SignalrService } from './signalr.service';
 
