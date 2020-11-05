@@ -33,7 +33,7 @@ namespace SignalrDemo.Server
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder => builder
-                .WithOrigins("http://localhost:4200", "https://mfcallahan.github.io/angular-signalr-demo") // the Angular app url
+                .WithOrigins("http://localhost:4200", "https://mfcallahan.github.io") // the Angular app url
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
