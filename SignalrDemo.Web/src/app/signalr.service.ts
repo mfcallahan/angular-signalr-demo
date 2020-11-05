@@ -13,10 +13,11 @@ export class SignalrService {
 
   constructor() { }
 
+  // establish a connection to the SignalR server hub
   public initiateSignalrConnection(): Promise<any>{
     return new Promise((resolve, reject) => {
       this.connection = new signalR.HubConnectionBuilder()
-        .withUrl('https://localhost:44333/signalrdemohub') // the SignalR server url, in the .NET Project properties
+        .withUrl('https://localhost:44333/signalrdemohub') // the SignalR server url as set in the .NET Project properties and Startup class
         .build();
 
       this.setSignalrClientMethods();

@@ -4,8 +4,8 @@ namespace SignalrDemo.Server.Interfaces
 {
     public interface ISignalrDemoHub
     {
-        Task DisplayMessage(string messgage);
+        Task DisplayMessage(string message);
         Task UpdateProgressBar(int percentage);
-        Task DisplayProgressMessage(string messgage);
+        Task DisplayProgressMessage(string message);
     }
 }
