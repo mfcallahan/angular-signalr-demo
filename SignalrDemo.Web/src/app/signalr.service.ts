@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import * as signalR from '@microsoft/signalr';
 
 @Injectable({
@@ -8,17 +8,17 @@ import * as signalR from '@microsoft/signalr';
 })
 export class SignalrService {
   connection: signalR.HubConnection;
-  hubHelloMessage: Subject<string>;
-  progressPercentage: Subject<number>;
-  progressMessage: Subject<string>;
+  hubHelloMessage: BehaviorSubject<string>;
+  progressPercentage: BehaviorSubject<number>;
+  progressMessage: BehaviorSubject<string>;
 
   constructor() {
-    this.hubHelloMessage = new Subject<string>();
-    this.progressPercentage = new Subject<number>();
-    this.progressMessage = new Subject<string>();
+    this.hubHelloMessage = new BehaviorSubject<string>(null);
+    this.progressPercentage = new BehaviorSubject<number>(null);
+    this.progressMessage = new BehaviorSubject<string>(null);
   }
 
-  // establish a connection to the SignalR server hub
+  // Establish a connection to the SignalR server hub
   public initiateSignalrConnection(): Promise<any>{
     return new Promise((resolve, reject) => {
       this.connection = new signalR.HubConnectionBuilder()
@@ -40,7 +40,7 @@ export class SignalrService {
     });
   }
 
-  // This method will implement the methods defined in the ISignalrDemoHub inteface in the SignalrDemo.Server .NET solution.
+  // This method will implement the methods defined in the ISignalrDemoHub inteface in the SignalrDemo.Server .NET solution
   private setSignalrClientMethods(): void {
     this.connection.on('DisplayMessage', (message: string) => {
       this.hubHelloMessage.next(message);
