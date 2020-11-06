@@ -1,4 +1,3 @@
-import { NgZone } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { SignalrService } from './signalr.service';
 
@@ -8,6 +7,9 @@ import { SignalrService } from './signalr.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  hubHelloMessage: string;
+  progressPercentage: number;
+  progressMessage: string;
   processing: boolean;
 
   constructor(public signalrService: SignalrService) { }
@@ -20,12 +22,24 @@ export class AppComponent implements OnInit {
         alert('SignalrDemoHub.Hello() error!, see console for details.');
       }
     );
+
+    this.signalrService.hubHelloMessage.subscribe((hubHelloMessage: string) => {
+      this.hubHelloMessage = hubHelloMessage;
+    });
+
+    this.signalrService.progressPercentage.subscribe((progressPercentage: number) => {
+      this.progressPercentage = progressPercentage;
+    });
+
+    this.signalrService.progressMessage.subscribe((progressMessage: string) => {
+      this.progressMessage = progressMessage;
+    });
   }
 
   public processData(): void {
     this.processing = true;
-    this.signalrService.progressPercentage = 0;
-    this.signalrService.progressMessage = null;
+    this.progressPercentage = 0;
+    this.progressMessage = null;
 
     this.signalrService.connection
       .invoke('SimulateDataProcessing')

@@ -1,13 +1,13 @@
 <h2>SignalR Demo</h2>
-<p><b>hubHelloMessage:</b> {{ signalrService.hubHelloMessage }}</p>
+<p><b>hubHelloMessage:</b> {{ hubHelloMessage }}</p>
 <p>
   <mat-progress-bar
     style="width: 400px; height: 20px; display: inline-block"
     mode="determinate"
-    [value]="signalrService.progressPercentage"
+    [value]="progressPercentage"
   >
   </mat-progress-bar>
-  <span>{{ signalrService.progressMessage }}</span>
+  <span style="margin-left: 20px;">{{ progressMessage }}</span>
 </p>
 <p>
   <button [disabled]="processing" (click)="processData()">Process Data</button>
