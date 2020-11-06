@@ -43,23 +43,14 @@ export class SignalrService {
   // This method will implement the methods defined in the ISignalrDemoHub inteface in the SignalrDemo.Server .NET solution.
   private setSignalrClientMethods(): void {
     this.connection.on('DisplayMessage', (message: string) => {
-      // this.ngZone.run(() => {
-      //   this.hubHelloMessage = message;
-      // });
       this.hubHelloMessage.next(message);
     });
 
     this.connection.on('UpdateProgressBar', (percentage: number) => {
-      // this.ngZone.run(() => {
-      //   this.progressPercentage = percentage;
-      // });
       this.progressPercentage.next(percentage);
     });
 
     this.connection.on('DisplayProgressMessage', (message: string) => {
-      // this.ngZone.run(() => {
-      //   this.progressMessage = message;
-      // });
       this.progressMessage.next(message);
     });
   }
