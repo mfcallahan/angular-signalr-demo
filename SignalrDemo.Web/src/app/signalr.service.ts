@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import * as signalR from '@microsoft/signalr';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SignalrService {
   connection: signalR.HubConnection;
@@ -19,7 +19,7 @@ export class SignalrService {
   }
 
   // Establish a connection to the SignalR server hub
-  public initiateSignalrConnection(): Promise<any>{
+  public initiateSignalrConnection(): Promise<void> {
     return new Promise((resolve, reject) => {
       this.connection = new signalR.HubConnectionBuilder()
         .withUrl(environment.signalrHubUrl) // the SignalR server url as set in the .NET Project properties and Startup class
@@ -30,7 +30,9 @@ export class SignalrService {
       this.connection
         .start()
         .then(() => {
-          console.log(`SignalR connection success! connectionId: ${this.connection.connectionId} `);
+          console.log(
+            `SignalR connection success! connectionId: ${this.connection.connectionId} `
+          );
           resolve();
         })
         .catch((error) => {
@@ -40,7 +42,7 @@ export class SignalrService {
     });
   }
 
-  // This method will implement the methods defined in the ISignalrDemoHub inteface in the SignalrDemo.Server .NET solution
+  // This method will implement the methods defined in the ISignalrDemoHub interface in the SignalrDemo.Server .NET solution
   private setSignalrClientMethods(): void {
     this.connection.on('DisplayMessage', (message: string) => {
       this.hubHelloMessage.next(message);

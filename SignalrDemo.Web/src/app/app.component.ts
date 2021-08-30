@@ -4,7 +4,7 @@ import { SignalrService } from './signalr.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   hubHelloMessage: string;
@@ -12,24 +12,23 @@ export class AppComponent implements OnInit {
   progressMessage: string;
   processing: boolean;
 
-  constructor(public signalrService: SignalrService) { }
+  constructor(public signalrService: SignalrService) {}
 
   ngOnInit(): void {
-    this.signalrService.connection
-      .invoke('Hello')
-      .catch(error => {
-        console.log(`SignalrDemoHub.Hello() error: ${error}`);
-        alert('SignalrDemoHub.Hello() error!, see console for details.');
-      }
-    );
+    this.signalrService.connection.invoke('Hello').catch((error) => {
+      console.log(`SignalrDemoHub.Hello() error: ${error}`);
+      alert('SignalrDemoHub.Hello() error!, see console for details.');
+    });
 
     this.signalrService.hubHelloMessage.subscribe((hubHelloMessage: string) => {
       this.hubHelloMessage = hubHelloMessage;
     });
 
-    this.signalrService.progressPercentage.subscribe((progressPercentage: number) => {
-      this.progressPercentage = progressPercentage;
-    });
+    this.signalrService.progressPercentage.subscribe(
+      (progressPercentage: number) => {
+        this.progressPercentage = progressPercentage;
+      }
+    );
 
     this.signalrService.progressMessage.subscribe((progressMessage: string) => {
       this.progressMessage = progressMessage;
@@ -46,10 +45,11 @@ export class AppComponent implements OnInit {
       .then(() => {
         this.processing = false;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(`SignalrDemoHub.SimulateDataProcessing() error: ${error}`);
-        alert('SignalrDemoHub.SimulateDataProcessing() error!, see console for details.');
-      }
-    );
+        alert(
+          'SignalrDemoHub.SimulateDataProcessing() error!, see console for details.'
+        );
+      });
   }
 }
