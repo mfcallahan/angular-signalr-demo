@@ -1,48 +1,41 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
 import * as signalR from '@microsoft/signalr';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class SignalrService {
-  connection: signalR.HubConnection;
+  hubUrl: string;
+  connection: any;
   hubHelloMessage: BehaviorSubject<string>;
   progressPercentage: BehaviorSubject<number>;
   progressMessage: BehaviorSubject<string>;
 
   constructor() {
-    this.hubHelloMessage = new BehaviorSubject<string>(null);
-    this.progressPercentage = new BehaviorSubject<number>(null);
-    this.progressMessage = new BehaviorSubject<string>(null);
+    this.hubUrl = 'https://localhost:7199/signalrdemohub';
+    this.hubHelloMessage = new BehaviorSubject<string>('');
+    this.progressPercentage = new BehaviorSubject<number>(0);
+    this.progressMessage = new BehaviorSubject<string>('');
   }
 
-  // Establish a connection to the SignalR server hub
-  public initiateSignalrConnection(): Promise<void> {
-    return new Promise((resolve, reject) => {
+  public async initiateSignalrConnection(): Promise<void> {
+    try {
       this.connection = new signalR.HubConnectionBuilder()
-        .withUrl(environment.signalrHubUrl) // the SignalR server url as set in the .NET Project properties and Startup class
+        .withUrl(this.hubUrl)
+        .withAutomaticReconnect()
         .build();
 
+      await this.connection.start();
       this.setSignalrClientMethods();
 
-      this.connection
-        .start()
-        .then(() => {
-          console.log(
-            `SignalR connection success! connectionId: ${this.connection.connectionId} `
-          );
-          resolve();
-        })
-        .catch((error) => {
-          console.log(`SignalR connection error: ${error}`);
-          reject();
-        });
-    });
+      console.log(`SignalR connection success! connectionId: ${this.connection.connectionId}`);
+    }
+    catch (error) {
+      console.log(`SignalR connection error: ${error}`);
+    }
   }
 
-  // This method will implement the methods defined in the ISignalrDemoHub interface in the SignalrDemo.Server .NET solution
   private setSignalrClientMethods(): void {
     this.connection.on('DisplayMessage', (message: string) => {
       this.hubHelloMessage.next(message);

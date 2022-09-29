@@ -1,21 +1,30 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+// This is the main enry point to the application, Startup.cs and Program.cs are now unified and
+// leverage top-level statements, eliinating the need to declare a namespace, class, and main method:
+// https://docs.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-6.0?view=aspnetcore-6.0
 
-namespace SignalrDemo.Server
+using SignalrDemo.Server.Hubs;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configure CORS
+var policyName = "defaultCorsPolicy";
+builder.Services.AddCors(options =>
 {
-    public static class Program
+    options.AddPolicy(policyName, builder =>
     {
-        // This method is the application entry point; Main() is called when the app is started.
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+        builder.WithOrigins("https://localhost:4200") // the Angular app url
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
 
-        // ASP.NET Core apps configure and launch a host which responsible for app startup and lifetime management.
-        // At a minimum, the host configures a server and a request processing pipeline. The host can also set up
-        // logging, dependency injection, and configuration. See this link for more information:
-        // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-3.1
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
-    }
-}
+// Configure SignalR
+builder.Services.AddSignalR();
+
+var app = builder.Build();
+app.UseRouting();
+app.UseCors(policyName);
+app.MapHub<SignalrDemoHub>("/signalrdemohub");
+
+app.Run();

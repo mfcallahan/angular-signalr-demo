@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using SignalrDemo.Server.Interfaces;
-using System;
 using System.Diagnostics;
-using System.Threading;
 
 namespace SignalrDemo.Server.Hubs
 {
@@ -21,13 +19,11 @@ namespace SignalrDemo.Server.Hubs
             int progressPercentage = 0;
             var random = new Random();
 
-            // iterate through a loop 10 times, waiting a random number of milliseconds before updating the progress bar
             for (int i = 0; i < 10; i++)
             {
-                int waitTimeMilliseconds = random.Next(100, 2500);
+                int waitTimeMilliseconds = random.Next(100, 1500);
                 Thread.Sleep(waitTimeMilliseconds);
 
-                // increment the progress bar by 10%
                 Clients.Caller.UpdateProgressBar(progressPercentage += 10);
             }
 
@@ -37,4 +33,6 @@ namespace SignalrDemo.Server.Hubs
         }
     }
 }
+
+
 

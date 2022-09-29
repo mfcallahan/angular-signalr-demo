@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace SignalrDemo.Server.Interfaces
+﻿namespace SignalrDemo.Server.Interfaces
 {
     public interface ISignalrDemoHub
     {
