@@ -12,10 +12,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(policyName, builder =>
     {
-        builder.WithOrigins("http://localhost:4200") // the Angular app url
-            .AllowAnyMethod()
+        builder.WithOrigins("https://localhost:4200") // the Angular app url
             .AllowAnyHeader()
-            .AllowAnyOrigin();
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 
@@ -23,8 +23,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddSignalR();
 
 var app = builder.Build();
-
+app.UseHttpsRedirection();
+app.UseRouting();
 app.UseCors(policyName);
-app.MapHub<SignalrDemoHub>("/RoutingHub");
+app.MapHub<SignalrDemoHub>("/signalrdemohub");
 
 app.Run();

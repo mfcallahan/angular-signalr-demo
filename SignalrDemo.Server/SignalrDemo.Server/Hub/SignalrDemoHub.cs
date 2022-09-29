@@ -5,11 +5,6 @@ namespace SignalrDemo.Server.Hubs
 {
     public class SignalrDemoHub : Hub<ISignalrDemoHub>
     {
-        public SignalrDemoHub()
-        {
-
-        }
-
         public void Hello()
         {
             Clients.Caller.DisplayMessage("Hello from the SignalrDemoHub!");
