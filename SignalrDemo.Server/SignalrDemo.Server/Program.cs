@@ -23,7 +23,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddSignalR();
 
 var app = builder.Build();
-app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors(policyName);
 app.MapHub<SignalrDemoHub>("/signalrdemohub");
