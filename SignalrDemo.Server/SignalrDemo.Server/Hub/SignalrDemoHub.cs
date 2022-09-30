@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using SignalrDemo.Server.Interfaces;
+﻿using SignalrDemo.Server.Interfaces;
 using System.Diagnostics;
 
 namespace SignalrDemo.Server.Hubs
