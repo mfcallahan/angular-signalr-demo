@@ -33,6 +33,3 @@ namespace SignalrDemo.Server.Hubs
         }
     }
 }
-
-
-
