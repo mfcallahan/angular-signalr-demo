@@ -1,4 +1,5 @@
-﻿using SignalrDemo.Server.Interfaces;
+﻿using Microsoft.AspNetCore.SignalR;
+using SignalrDemo.Server.Interfaces;
 using System.Diagnostics;
 
 namespace SignalrDemo.Server.Hubs
@@ -32,6 +33,3 @@ namespace SignalrDemo.Server.Hubs
         }
     }
 }
-
-
-
