@@ -10,7 +10,7 @@ builder.Services.AddCors(options =>
         builder.WithOrigins("https://localhost:4200") // the Angular app url
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowAnyOrigin();
+            .AllowCredentials();
     });
 });
 

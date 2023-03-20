@@ -19,15 +19,9 @@ export class SignalrService {
         .withAutomaticReconnect()
         .build();
 
-      this.connection.start().then(() => {
-        console.log(`SignalR connection success! connectionId: ${this.connection.connectionId}`);
-      }).catch((err: any) => {
-          return console.error(err.toString());
-      });
+      await this.connection.start({ withCredentials: false });
 
-      await this.connection.start();
-
-
+      console.log(`SignalR connection success! connectionId: ${this.connection.connectionId}`);
     }
     catch (error) {
       console.log(`SignalR connection error: ${error}`);
