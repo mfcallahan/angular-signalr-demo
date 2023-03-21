@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  signalrHubUrl: 'https://localhost:44333/signalrdemohub',
+  signalrHubUrl: 'https://localhost:7199/signalrdemohub',
 };
 
 /*

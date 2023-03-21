@@ -7,7 +7,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(policyName, builder =>
     {
-        builder.WithOrigins("https://localhost:4200") // the Angular app url
+        builder.WithOrigins("http://localhost:4200", "https://mfcallahan.github.io") // the Angular app url
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials();
@@ -18,6 +18,12 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
+app.UseHttpsRedirection();
 app.UseCors(policyName);
 app.MapHub<SignalrDemoHub>("/signalrdemohub");
 

@@ -15,20 +15,20 @@ export class AppComponent implements OnInit {
   constructor(public signalrService: SignalrService) { }
 
   ngOnInit(): void {
-    this.signalrService.connection.invoke('Hello').catch((error: any) => {
-      console.log(`SignalrDemoHub.Hello() error: ${error.toString()}`);
-      alert('SignalrDemoHub.Hello() error!, see console for details.');
-    });
+    this.signalrService.connection
+      .invoke('Hello')
+      .catch((error: any) => {
+        console.log(`SignalrDemoHub.Hello() error: ${error.toString()}`);
+        alert('SignalrDemoHub.Hello() error!, see console for details.');
+      });
 
     this.signalrService.hubHelloMessage.subscribe((hubHelloMessage: string) => {
       this.hubHelloMessage = hubHelloMessage;
     });
 
-    this.signalrService.progressPercentage.subscribe(
-      (progressPercentage: number) => {
-        this.progressPercentage = progressPercentage;
-      }
-    );
+    this.signalrService.progressPercentage.subscribe((progressPercentage: number) => {
+      this.progressPercentage = progressPercentage;
+    });
 
     this.signalrService.progressMessage.subscribe((progressMessage: string) => {
       this.progressMessage = progressMessage;
@@ -47,9 +47,7 @@ export class AppComponent implements OnInit {
       })
       .catch((error: any) => {
         console.log(`SignalrDemoHub.SimulateDataProcessing() error: ${error}`);
-        alert(
-          'SignalrDemoHub.SimulateDataProcessing() error!, see console for details.'
-        );
+        alert('SignalrDemoHub.SimulateDataProcessing() error!, see console for details.');
       });
   }
 }
