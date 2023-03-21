@@ -23,7 +23,6 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseHttpsRedirection();
 app.UseCors(policyName);
 app.MapHub<SignalrDemoHub>("/signalrdemohub");
 

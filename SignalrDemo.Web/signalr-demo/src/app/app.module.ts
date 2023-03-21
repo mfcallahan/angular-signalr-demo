@@ -13,12 +13,12 @@ import { SignalrService } from './signalr.service';
     SignalrService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (signalrService: SignalrService) => () =>
-        signalrService.initiateSignalrConnection(),
+      useFactory: (signalrService: SignalrService) => () => signalrService.initiateSignalrConnection(),
       deps: [SignalrService],
       multi: true,
     },
   ],
   bootstrap: [AppComponent],
 })
+
 export class AppModule { }
