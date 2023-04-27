@@ -16,6 +16,8 @@ namespace SignalrDemo.Server
     // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup?view=aspnetcore-3.1
     public class Startup
     {
+        // Hello.
+        
         // The Startup class is created by calling the WebHostBuilderExtensions.UseStartup<TStartup> method on
         // the host builder inside the CreateHostBuilder() in Program.cs.
         public Startup(IConfiguration configuration)
